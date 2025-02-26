@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: "Love Struck Script Demo";
-  src: url("../fonts/my-font.ttf") format("truetype");
+  src: url("fonts/my-font.ttf") format("truetype");
 }
 
 body {
@@ -38,13 +38,13 @@ body {
   top: 0;
   height: 100vh;
   z-index: 1;
-  
+  overflow-y: auto;
 }
 
 .visual {
   width: 70%; 
   margin-left: 30%;
   padding: 20px;
-  height: 100vh;
-  overflow-y: scroll; 
+  min-height: 100vh;
+  overflow-y: auto; 
 }
