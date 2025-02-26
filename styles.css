@@ -3,8 +3,8 @@
 }
 
 @font-face {
-  font-family: "Love Struck Script Demo";
-  src: url("my-font.ttf") format("truetype");
+  font-family: "Love Struck Script";
+  src: url("Demo Love Struck-Script.otf") format("opentype");
 }
 
 body {
