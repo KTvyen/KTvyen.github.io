@@ -2,6 +2,11 @@
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: "Love Struck Script Demo";
+  src: url("/fonts/my-font.ttf") format("truetype");
+}
+
 body {
   margin: 0;
   font-family: sans-serif;
@@ -17,7 +22,7 @@ body {
   border-bottom: 8px solid #59aaff;
   position: relative;
   z-index: 2;
-  font-family: Orsay;
+  font-family: "Love Struck Script Demo", sans-serif;
 }
 
 .container {
