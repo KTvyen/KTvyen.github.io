@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: "Love Struck Script Demo";
-  src: url("fonts/my-font.ttf") format("truetype");
+  src: url("my-font.ttf") format("truetype");
 }
 
 body {
