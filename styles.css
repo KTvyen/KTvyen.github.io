@@ -17,27 +17,29 @@ body {
   border-bottom: 8px solid #59aaff;
   position: relative;
   z-index: 2;
+  font-family: Orsay;
 }
 
 .container {
-    display: flex; 
-    height: 100vh;
+  display: flex; 
+  height: 100vh;
 }
 
 .auto-bio {
-    width: 30%; 
-    background-color: lightgray;
-    padding: 20px;
-    position: fixed;
-    top: 0;
-    height: 100vh;
-    z-index: 1;
+  width: 30%; 
+  background-color: lightgray;
+  padding: 20px;
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  z-index: 1;
+  
 }
 
 .visual {
-    width: 70%; 
-    margin-left: 30%;
-    padding: 20px;
-    height: 100vh;
-    overflow-y: scroll; 
+  width: 70%; 
+  margin-left: 30%;
+  padding: 20px;
+  height: 100vh;
+  overflow-y: scroll; 
 }
