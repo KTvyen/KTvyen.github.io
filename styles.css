@@ -21,7 +21,7 @@ body {
   text-transform: uppercase;
   padding: 42px;
   color: #000000;
-  background-image: url("bg/tree.png");
+  background-image: url("tree.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
