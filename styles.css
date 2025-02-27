@@ -41,6 +41,9 @@ body {
   font-weight: 250;
 }
 
+.header h1, #m-name {
+  text-shadow: 4px 4px 5px white; 
+}
 
 .container {
   display: flex; 
