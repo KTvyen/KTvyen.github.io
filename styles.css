@@ -51,7 +51,7 @@ body {
 
 .auto-bio {
   width: 30%; 
-  background-color: lightgray;
+  background-color: rgb(105, 47, 30);
   padding: 20px;
   position: fixed;
   top: 0;
