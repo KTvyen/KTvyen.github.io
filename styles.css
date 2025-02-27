@@ -3,10 +3,13 @@
 }
 
 @font-face {
-  font-family: "Love Struck Script";
+  font-family: "Love-Struck-Script";
   src: url("Demo Love Struck-Script.otf") format("opentype");
 }
-
+@font-face {
+  font-family: "Love-Struck-Regular";
+  src: url("Demo Love Struck-Regular.otf") format("opentype");
+}
 body {
   margin: 0;
   font-family: sans-serif;
@@ -22,8 +25,13 @@ body {
   border-bottom: 8px solid #59aaff;
   position: relative;
   z-index: 2;
-  font-family: "Love Struck Script", sans-serif;
+  font-family: "Love-Struck-Script", sans-serif;
 }
+
+#m-name {
+  font-family: "Demo Love Struck-Regular", sans-serif;
+}
+
 
 .container {
   display: flex; 
