@@ -32,7 +32,7 @@ body {
   font-size: 38px;
   letter-spacing: 10px;
   font-weight: 100;
-  text-shadow: 4px 4px 0px white;
+  text-shadow: 4px 4px 0px rgb(242, 249, 249);
 }
 
 #m-name {
@@ -40,7 +40,7 @@ body {
   font-size: 32px;
   letter-spacing: 7px;
   font-weight: 250;
-  text-shadow: 2px 2px 0px white;
+  text-shadow: 2px 2px 0px rgb(242, 249, 249);
 }
 
 
