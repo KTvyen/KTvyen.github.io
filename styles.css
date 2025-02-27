@@ -20,9 +20,12 @@ body {
   text-align: center;
   text-transform: uppercase;
   padding: 42px;
-  background-color: #a5d1ff;
   color: #000000;
-  border-bottom: 8px solid #59aaff;
+  background-image: url("bg\tree.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 200px;
   position: relative;
   z-index: 2;
   font-family: "Love-Struck-Script", sans-serif;
