@@ -21,7 +21,7 @@ body {
   text-transform: uppercase;
   padding: 42px;
   color: #000000;
-  background-image: url("bg\tree.png");
+  background-image: url("bg/tree.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -30,8 +30,8 @@ body {
   z-index: 2;
   font-family: "Love-Struck-Script", sans-serif;
   font-size: 38px;
-  letter-spacing: 35px;
-  font-weight: 72;
+  letter-spacing: 10px;
+  font-weight: 100;
 }
 
 #m-name {
