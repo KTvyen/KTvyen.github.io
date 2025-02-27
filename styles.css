@@ -26,10 +26,12 @@ body {
   position: relative;
   z-index: 2;
   font-family: "Love-Struck-Script", sans-serif;
+  font-size: 48px;
 }
 
 #m-name {
   font-family: "Love-Struck-Regular", sans-serif;
+  font-size: 32px;
 }
 
 
