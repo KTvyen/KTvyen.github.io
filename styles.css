@@ -42,7 +42,7 @@ body {
 }
 
 .header h1, #m-name {
-  text-shadow: 4px 4px 5px white; 
+  text-shadow: 4px 4px 0px white; 
 }
 
 .container {
