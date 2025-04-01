@@ -170,7 +170,7 @@ function draw() {
   ctx.fillText("Kate", kateX - 10, platforms[0].y + 80);
   ctx.fillText("Nguyen", nguyenX, platforms[1].y + 20);
 
-  ctx.font = "45px 'SuperPixel', Arial";
+  ctx.font = "45px 'SuperPixel'";
   ctx.fillText("Portfolio Website", portfolioX + 10, platforms[1].y + 100);
 
   ctx.restore();
