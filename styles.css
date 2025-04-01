@@ -1,69 +1,51 @@
+@font-face {
+  font-family: 'SuperPixel';
+  src: url('SuperPixel-m2L8j.woff2') format('woff2'),
+       url('SuperPixel-m2L8j.woff') format('woff'),
+       url('SuperPixel-m2L8j.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
-@font-face {
-  font-family: "Love-Struck-Script";
-  src: url("Demo Love Struck-Script.otf") format("opentype");
-}
-@font-face {
-  font-family: "Love-Struck-Regular";
-  src: url("Demo Love Struck-Regular.otf") format("opentype");
-}
 body {
-  margin: 0;
-  font-family: sans-serif;
-  background: #f5f6f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #000;
+  
 }
 
-.header {
-  text-align: center;
-  text-transform: uppercase;
-  padding: 42px;
-  color: #000000;
-  background-image: url("tree.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 350px;
-  position: relative;
-  z-index: 2;
-  font-family: "Love-Struck-Script", sans-serif;
-  font-size: 38px;
-  letter-spacing: 10px;
-  font-weight: 100;
-  text-shadow: 4px 4px 0px rgb(203, 221, 221);
-}
-
-#m-name {
-  font-family: "Love-Struck-Regular", sans-serif;
-  font-size: 32px;
-  letter-spacing: 7px;
-  font-weight: 250;
-  text-shadow: 2px 2px 0px rgb(203, 221, 221);
-}
-
-
-.container {
-  display: flex; 
+.game-container {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100vh;
 }
 
-.auto-bio {
-  width: 30%; 
-  background-color: rgb(105, 47, 30);
-  padding: 20px;
-  position: fixed;
-  top: 0;
-  height: 100vh;
-  z-index: 1;
-  overflow-y: auto;
+canvas {
+  background-color: transparent;
+  display: block;
 }
 
-.visual {
-  width: 70%; 
-  margin-left: 30%;
-  padding: 20px;
-  min-height: 100vh;
-  overflow-y: auto; 
+.border {
+  width: 25%;
+  background-color: white;
+  height: 100vh;
 }
+
+.left-border {
+  background-color: white;
+}
+
+.right-border {
+  background-color: white;
+}
+
