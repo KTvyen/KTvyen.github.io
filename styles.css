@@ -19,7 +19,6 @@ body {
   align-items: center;
   height: 100vh;
   background: #000;
-  
 }
 
 .game-container {
@@ -28,6 +27,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  position: relative;
 }
 
 canvas {
@@ -41,11 +41,46 @@ canvas {
   height: 100vh;
 }
 
-.left-border {
+.left-border, .right-border {
   background-color: white;
 }
 
-.right-border {
-  background-color: white;
+.title {
+  position: absolute;
+  top: 10%;
+  right: 5%;
+  font-family: 'SuperPixel', sans-serif;
+  font-size: 3vw;
+  color: white;
+  text-align: right;
 }
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .title {
+    font-size: 4vw;
+    right: 3%;
+  }
+}
+
+@media (max-width: 800px) {
+  .title {
+    font-size: 6vw;
+    right: 50%;
+    transform: translateX(50%);
+    text-align: center;
+  }
+}
+
+@media (max-width: 500px) {
+  .title {
+    font-size: 8vw;
+    right: 50%;
+    transform: translateX(50%);
+    text-align: center;
+  }
+}
+
+
+
 
