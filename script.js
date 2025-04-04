@@ -104,7 +104,7 @@ function update() {
 
   if (keys.down && player.onPlatformIndex !== -1) {
     ignoredPlatformIndex = player.onPlatformIndex;
-    player.dy = 20;
+    player.dy += 10;
   }
 
   player.onPlatformIndex = -1;
