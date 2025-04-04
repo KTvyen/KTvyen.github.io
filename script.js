@@ -54,7 +54,7 @@ const keys = { left: false, right: false, down: false };
 let cameraY = 0;
 
 let kateX, nguyenX, portfolioX;
-const textSpeed = 7;
+const textSpeed = 5;
 function resetTextAnimation() {
   kateX = canvas.width;
   nguyenX = canvas.width;
