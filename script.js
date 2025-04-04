@@ -1,7 +1,6 @@
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
-// Set canvas size to fit the available game container
 function resizeCanvas() {
   const gameContainer = document.querySelector('.game-container');
   canvas.width = gameContainer.clientWidth;
@@ -10,7 +9,6 @@ function resizeCanvas() {
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas);
 
-// Character selection
 const characterSprites = {
   red: 'redberry.png',
   blue: 'blueberry.png',
@@ -19,11 +17,10 @@ const characterSprites = {
   yellow: 'yellowberry.png'
 };
 
-let selectedCharacter = 'red'; // Default character
+let selectedCharacter = 'red';
 const characterImage = new Image();
 characterImage.src = characterSprites[selectedCharacter];
 
-// Player properties
 const player = {
   x: canvas.width / 2 - 35,
   y: 50,
@@ -37,7 +34,8 @@ const player = {
   onPlatformIndex: -1
 };
 
-// Generate platforms in a zig-zag pattern
+let ignoredPlatformIndex = -1;
+
 const platforms = [];
 const platformSpacing = 200;
 const totalPlatforms = 17;
@@ -47,22 +45,14 @@ let startX = 50;
 
 for (let i = 0; i < totalPlatforms; i++) {
   platforms.push({ x: startX, y: i * platformSpacing + 100, width: 200, height: 20 });
-  
-  if (i % 2 === 1) {
-    startX += direction * 250;
-  }
-  if (i % 4 === 3) {
-    direction *= -1;
-  }
+  if (i % 2 === 1) startX += direction * 250;
+  if (i % 4 === 3) direction *= -1;
 }
 
-// Controls
-const keys = { left: false, right: false };
+const keys = { left: false, right: false, down: false };
 
-// Camera position
 let cameraY = 0;
 
-// Text animation properties
 let kateX, nguyenX, portfolioX;
 const textSpeed = 9;
 function resetTextAnimation() {
@@ -72,14 +62,15 @@ function resetTextAnimation() {
 }
 resetTextAnimation();
 
-// Key press event listeners
 document.addEventListener("keydown", (event) => {
   if (event.code === "ArrowLeft") keys.left = true;
   if (event.code === "ArrowRight") keys.right = true;
-  if ((event.code === "ArrowUp" || event.code === "Space") && player.dy === 0) {
+  if (event.code === "ArrowDown" || event.code === "KeyS") keys.down = true;
+
+  if ((event.code === "ArrowUp" || event.code === "Space" || event.code === "KeyW") && player.dy === 0) {
     player.dy = player.jumpPower;
   }
-  
+
   if (event.code === "Digit1") changeCharacter('red');
   if (event.code === "Digit2") changeCharacter('yellow');
   if (event.code === "Digit3") changeCharacter('orange');
@@ -90,6 +81,7 @@ document.addEventListener("keydown", (event) => {
 document.addEventListener("keyup", (event) => {
   if (event.code === "ArrowLeft") keys.left = false;
   if (event.code === "ArrowRight") keys.right = false;
+  if (event.code === "ArrowDown" || event.code === "KeyS") keys.down = false;
 });
 
 function drawBackground() {
@@ -110,16 +102,25 @@ function update() {
   if (player.x < 0) player.x = 0;
   if (player.x + player.width > canvas.width) player.x = canvas.width - player.width;
 
+  if (keys.down && player.onPlatformIndex !== -1) {
+    ignoredPlatformIndex = player.onPlatformIndex;
+    player.dy = 20;
+  }
+
   player.onPlatformIndex = -1;
   platforms.forEach((platform, i) => {
-    if (player.dy > 0 &&
+    if (i === ignoredPlatformIndex) return;
+    if (
+      player.dy > 0 &&
       player.x < platform.x + platform.width &&
       player.x + player.width > platform.x &&
       player.y + player.height >= platform.y &&
-      player.y + player.height - player.dy <= platform.y) {
+      player.y + player.height - player.dy <= platform.y
+    ) {
       player.y = platform.y - player.height;
       player.dy = 0;
       player.onPlatformIndex = i;
+      ignoredPlatformIndex = -1;
     }
   });
 
@@ -133,23 +134,16 @@ function update() {
 
   cameraY = Math.max(0, player.y - canvas.height / 2);
 
-  // Animate the text sliding in from the right
   if (kateX > platforms[0].x + 520) {
     kateX -= textSpeed;
-} else if (nguyenX > platforms[1].x + 300) {
+  } else if (nguyenX > platforms[1].x + 300) {
     nguyenX -= textSpeed;
-} else if (portfolioX > platforms[1].x + 300) {
+  } else if (portfolioX > platforms[1].x + 300) {
     portfolioX -= textSpeed;
-}
-if (nguyenX > platforms[1].x + 300) {
-    nguyenX -= textSpeed;
-}
-if (portfolioX > platforms[1].x + 300) {
-    portfolioX -= textSpeed;
-}
-  if (nguyenX > platforms[1].x + 300) {
-    nguyenX -= textSpeed;
   }
+
+  if (nguyenX > platforms[1].x + 300) nguyenX -= textSpeed;
+  if (portfolioX > platforms[1].x + 300) portfolioX -= textSpeed;
 }
 
 function draw() {
@@ -166,11 +160,11 @@ function draw() {
   });
 
   ctx.fillStyle = "white";
-  ctx.font = "125px 'SuperPixel', Arial";
+  ctx.font = "125px 'SuperPixel'";
   ctx.fillText("Kate", kateX - 10, platforms[0].y + 80);
   ctx.fillText("Nguyen", nguyenX, platforms[1].y + 20);
 
-  ctx.font = "45px 'SuperPixel'";
+  ctx.font = "45px 'SuperPixel', Arial";
   ctx.fillText("Portfolio Website", portfolioX + 10, platforms[1].y + 100);
 
   ctx.restore();
@@ -181,6 +175,15 @@ function gameLoop() {
   draw();
   requestAnimationFrame(gameLoop);
 }
+gameLoop();
+
+function changeCharacter(color) {
+  if (characterSprites[color]) {
+    selectedCharacter = color;
+    characterImage.src = characterSprites[selectedCharacter];
+  }
+}
+
 gameLoop();
 
 function changeCharacter(color) {
