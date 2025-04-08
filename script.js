@@ -10,11 +10,10 @@ resizeCanvas();
 window.addEventListener('resize', resizeCanvas);
 
 const characterSprites = {
-  red: 'redberry.png',
-  blue: 'blueberry.png',
-  orange: 'orangeberry.png',
-  purple: 'purpleberry.png',
-  yellow: 'yellowberry.png'
+  red: 'watermelon.png',
+  blue: 'prettyblueberry.png',
+  orange: 'orange.png',
+  brown: 'coconut.png'
 };
 
 let selectedCharacter = 'red';
@@ -25,7 +24,7 @@ const player = {
   x: canvas.width / 2 - 35,
   y: 50,
   width: 150,
-  height: 100,
+  height: 150,
   dx: 0,
   dy: 0,
   speed: 7,
@@ -54,7 +53,7 @@ const keys = { left: false, right: false, down: false };
 let cameraY = 0;
 
 let kateX, nguyenX, portfolioX;
-const textSpeed = 9;
+const textSpeed = 7;
 function resetTextAnimation() {
   kateX = canvas.width;
   nguyenX = canvas.width;
@@ -72,10 +71,9 @@ document.addEventListener("keydown", (event) => {
   }
 
   if (event.code === "Digit1") changeCharacter('red');
-  if (event.code === "Digit2") changeCharacter('yellow');
-  if (event.code === "Digit3") changeCharacter('orange');
-  if (event.code === "Digit4") changeCharacter('purple');
-  if (event.code === "Digit5") changeCharacter('blue');
+  if (event.code === "Digit4") changeCharacter('brown');
+  if (event.code === "Digit2") changeCharacter('orange');
+  if (event.code === "Digit3") changeCharacter('blue');
 });
 
 document.addEventListener("keyup", (event) => {
@@ -104,7 +102,7 @@ function update() {
 
   if (keys.down && player.onPlatformIndex !== -1) {
     ignoredPlatformIndex = player.onPlatformIndex;
-    player.dy = 20;
+    player.dy += 10;
   }
 
   player.onPlatformIndex = -1;
