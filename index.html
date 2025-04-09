@@ -10,8 +10,52 @@
     <div class="border left-border"></div>
     <div class="game-container">
         <canvas id="gameCanvas"></canvas>
+        <!-- Gray overlay inside the game-container -->
+        <div id="gameOverlay">
+            <div id="gameObjective">
+                <h1>Kate Nguyen's Portfolio Adventure</h1>
+                <p>Welcome to my interactive portfolio! Navigate through platforms to discover my projects and learn more about me.</p>
+                <ul>
+                    <li>Use arrow keys or WASD to move and jump</li>
+                    <li>Press S or Down arrow to drop through platforms</li>
+                    <li>Numbers 1-4 switch between characters</li>
+                    <li>Press P to pause the game</li>
+                </ul>
+                <p class="objective">Your mission: Explore the entire world to find information about my skills, projects, and background!</p>
+            </div>
+            <button id="startBtn">Start</button>
+            <button id="resumeBtn" style="display: none;">Resume</button>
+            <button id="restartBtn" style="display: none;">Restart</button>
+        </div>
     </div>
-    <div class="border right-border"></div>
+    <div class="border right-border">
+        <div class="nav-container">
+            <div class="nav-item home-btn" data-section="home">
+                <span>Home</span>
+            </div>
+            
+            <div class="nav-item about-btn" data-section="about">
+                <span>About Me</span>
+            </div>
+            
+            <div class="nav-item dropdown">
+                <span>Projects</span>
+                <div class="dropdown-content">
+                    <div class="nav-item project-btn" data-project="project1">Web Development</div>
+                    <div class="nav-item project-btn" data-project="project2">UI/UX Design</div>
+                    <div class="nav-item project-btn" data-project="project3">Mobile App Development</div>
+                    <div class="nav-item project-btn" data-project="project4">Game Design</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Info overlay for displaying content -->
+    <div id="infoOverlay" class="info-overlay">
+        <div class="info-container">
+            <div class="info-close">×</div>
+            <div class="info-content"></div>
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>

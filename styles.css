@@ -19,6 +19,7 @@ body {
   align-items: center;
   height: 100vh;
   background: #000;
+  overflow: hidden;
 }
 
 .game-container {
@@ -33,12 +34,15 @@ body {
 canvas {
   background-color: transparent;
   display: block;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .border {
   width: 25%;
   background-color: white;
   height: 100vh;
+  position: relative;
 }
 
 .left-border, .right-border {
@@ -55,11 +59,364 @@ canvas {
   text-align: right;
 }
 
+/* Gray overlay covering canvas */
+#gameOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(100, 100, 100, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+#gameOverlay button {
+  font-family: 'SuperPixel', sans-serif;
+  font-size: 2rem;
+  padding: 10px 30px;
+  margin: 10px;
+  background: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+#gameOverlay button:hover {
+  background: #ddd;
+}
+
+/* Character Selection Styles */
+.character-selection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  height: 100%;
+}
+
+.character-selection h2 {
+  font-family: 'SuperPixel', sans-serif;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.character-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 10px;
+  transition: background-color 0.2s;
+}
+
+.character-option img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 5px;
+}
+
+.character-option span {
+  font-family: 'SuperPixel', sans-serif;
+  font-size: 24px;
+  color: #333;
+}
+
+.character-option.selected {
+  background-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Game Objective Styles */
+#gameObjective {
+  font-family: 'SuperPixel', sans-serif;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  max-width: 80%;
+}
+
+#gameObjective h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+#gameObjective p {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  line-height: 1.5;
+}
+
+#gameObjective ul {
+  list-style: none;
+  margin: 15px 0;
+  padding: 0;
+  text-align: left;
+  display: inline-block;
+}
+
+#gameObjective li {
+  font-size: 1rem;
+  margin: 8px 0;
+  padding-left: 20px;
+  position: relative;
+}
+
+#gameObjective li:before {
+  content: '→';
+  position: absolute;
+  left: 0;
+}
+
+#gameObjective .objective {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffdd00;
+  margin-top: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* Project Discovery Styles */
+.project-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+}
+
+.project-card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 500px;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+  animation: cardAppear 0.5s ease-out;
+}
+
+@keyframes cardAppear {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.project-card h2 {
+  font-family: 'SuperPixel', sans-serif;
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.project-card p {
+  font-family: Arial, sans-serif;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.continue-btn {
+  font-family: 'SuperPixel', sans-serif;
+  font-size: 1.2rem;
+  padding: 10px 20px;
+  background: #ffaa00;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.continue-btn:hover {
+  background: #ff8800;
+}
+
+/* Navigation Styles */
+.nav-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  height: 100%;
+  font-family: 'SuperPixel', sans-serif;
+}
+
+.nav-item {
+  padding: 15px;
+  margin-bottom: 10px;
+  color: #333;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: background-color 0.3s, transform 0.2s;
+  position: relative;
+  text-align: center;
+}
+
+.nav-item:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.nav-item.active {
+  background-color: rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Dropdown Menu */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  background-color: white;
+  width: 100%;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Add this new class to make dropdown stay open when active */
+.dropdown.active .dropdown-content {
+  display: block;
+}
+
+.dropdown-content .nav-item {
+  margin-bottom: 0;
+  padding: 12px;
+  border-radius: 0;
+}
+
+.dropdown-content .nav-item:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Info Overlay for displaying content */
+.info-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.info-container {
+  background-color: white;
+  width: 80%;
+  max-width: 700px;
+  max-height: 80vh;
+  border-radius: 15px;
+  position: relative;
+  padding: 30px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+  overflow-y: auto;
+}
+
+.info-close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 30px;
+  cursor: pointer;
+  color: #333;
+  transition: color 0.2s;
+}
+
+.info-close:hover {
+  color: #ff4040;
+}
+
+.info-content {
+  font-family: Arial, sans-serif;
+}
+
+.info-content h2 {
+  font-family: 'SuperPixel', sans-serif;
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+.info-content p {
+  margin-bottom: 15px;
+  line-height: 1.6;
+  color: #555;
+}
+
+.info-content ul {
+  margin-left: 20px;
+  margin-bottom: 15px;
+}
+
+.info-content ul li {
+  margin-bottom: 8px;
+}
+
+.info-content h3 {
+  font-family: 'SuperPixel', sans-serif;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  color: #444;
+}
+
+/* Project specific styling */
+.project-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.project-image {
+  width: 100%;
+  height: 200px;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+}
+
 /* Responsive adjustments */
 @media (max-width: 1200px) {
   .title {
     font-size: 4vw;
     right: 3%;
+  }
+  
+  .character-option img {
+    width: 60px;
+    height: 60px;
   }
 }
 
@@ -70,6 +427,32 @@ canvas {
     transform: translateX(50%);
     text-align: center;
   }
+  
+  #gameObjective h1 {
+    font-size: 2rem;
+  }
+  
+  #gameObjective p, #gameObjective .objective {
+    font-size: 1rem;
+  }
+  
+  #gameObjective li {
+    font-size: 0.9rem;
+  }
+  
+  .character-option img {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .info-container {
+    width: 90%;
+    padding: 20px;
+  }
+  
+  .info-content h2 {
+    font-size: 1.5rem;
+  }
 }
 
 @media (max-width: 500px) {
@@ -79,7 +462,18 @@ canvas {
     transform: translateX(50%);
     text-align: center;
   }
+  
+  .character-option img {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .character-option span {
+    font-size: 16px;
+  }
 }
+
+
 
 
 
