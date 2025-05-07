@@ -56,18 +56,49 @@ const player = {
 
 let ignoredPlatformIndex = -1;
 
+//
 const platforms = [];
-const platformSpacing = 200;
-const totalPlatforms = 17;
+const screenWidth = 1365;
+const platformSpacing = 150; // Vertical spacing between platforms
+const platformWidth = 180;
+const totalPlatforms = 25;
 const totalLevelHeight = totalPlatforms * platformSpacing;
-let direction = 1;
-let startX = 50;
+
+// Parameters for zigzag pattern
+const platformsPerDirection = 5; // 5 platforms per direction before switching
+const horizontalStep = 220; // Horizontal distance between consecutive platforms
+let currentX = 100; // Starting X position
+let direction = 1; // 1 = right, -1 = left
 
 for (let i = 0; i < totalPlatforms; i++) {
-  platforms.push({ x: startX, y: i * platformSpacing + 100, width: 200, height: 20 });
-  if (i % 2 === 1) startX += direction * 250;
-  if (i % 4 === 3) direction *= -1;
+  // Add current platform
+  platforms.push({ 
+    x: currentX, 
+    y: i * platformSpacing + 100, 
+    width: platformWidth, 
+    height: 20 
+  });
+  
+  // Update X position for next platform
+  currentX += direction * horizontalStep;
+  
+  // Check if we need to change direction
+  if ((i + 1) % platformsPerDirection === 0) {
+    direction *= -1; // Reverse direction
+    
+    // Adjust X position to prevent going off-screen
+    if (currentX + direction * horizontalStep < 50) {
+      currentX = 50; // Left boundary
+    } else if (currentX + platformWidth + direction * horizontalStep > screenWidth - 50) {
+      currentX = screenWidth - platformWidth - 50; // Right boundary
+    }
+  }
+  
+  // Safety checks to keep platforms on screen
+  if (currentX < 50) currentX = 50;
+  if (currentX > screenWidth - platformWidth - 50) currentX = screenWidth - platformWidth - 50;
 }
+
 
 const keys = { left: false, right: false, down: false };
 let cameraY = 0;
@@ -593,56 +624,59 @@ function showInfoContent(contentType, title) {
     case 'about':
       content = `
         <h2>About Me</h2>
-        <p>Hello! I'm Kate Nguyen, a creative developer with a passion for interactive experiences and innovative web solutions.</p>
-        <p>With expertise in web development, UI/UX design, mobile application development, and game design, I bring a diverse skill set to every project I work on.</p>
-        <p>My journey in technology began with [your background information here], and I've since worked on numerous projects that showcase my ability to blend technical knowledge with creative thinking.</p>
-        <p>I believe in creating digital experiences that are not only functional but also engaging and enjoyable for users.</p>
+        <p>Hello! I'm Kate Nguyen, a creative beginner web devloper!</p>
+        <p>I have worked with html, css, and js to create the website you are seeing right now.</p>
+        <p>However before I got here I had to start learning. My journey began at EVIT in the Software App and Desgin program. Where I learned to code in python, html, and css.</p>
+        <p>Afterword I put in my skill to create this interactive website using AI to help guide me along the way.</p>
         <p><strong>Skills:</strong></p>
         <ul>
           <li>Front-end Development (HTML, CSS, JavaScript)</li>
           <li>UI/UX Design</li>
-          <li>Mobile App Development</li>
           <li>Game Design and Development</li>
-          <li>[Add your other relevant skills]</li>
+          <li>Python</li>
         </ul>
         <p><strong>Education:</strong></p>
-        <p>[Your education details here]</p>
+        <p>High School Education: CDS </p>
+        <p>EVIT: Software App and Desgin Program</p>
         <p><strong>Contact:</strong></p>
-        <p>Email: [your email]</p>
-        <p>LinkedIn: [your LinkedIn profile]</p>
-        <p>GitHub: [your GitHub profile]</p>
+        <p>Email: <a href="mailto:katenguyen08.az@icloud.com">katenguyen08.az@icloud.com</a></p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/kate-nguyen-3a937334b/" target="_blank">Kate Nguyen</a></p>
+        <p>GitHub: <a href="https://github.com/KTvyen" target="_blank">KTvyen</a></p>
       `;
       break;
       
     case 'project1':
-      content = getProjectContent('Web Development', 'Created responsive websites using HTML, CSS, and JavaScript', [
-        'Developed a responsive e-commerce platform with shopping cart functionality',
-        'Created a blog website with content management system',
-        'Built a portfolio website using modern web technologies'
-      ]);
+      content = getProjectContent(
+        'Web Development', 
+        'Created responsive websites using HTML, CSS, and JavaScript', 
+        [
+          'Created a website with content management system',
+          'Built a portfolio website using modern web technologies'
+        ],
+        'development_photo.png' // Image is in the same folder
+      );
       break;
       
     case 'project2':
       content = getProjectContent('UI/UX Design', 'Designed user interfaces focusing on user experience and accessibility', [
-        'Redesigned an app interface leading to 40% increase in user engagement',
         'Created wireframes and prototypes for multiple web applications',
         'Conducted user testing and implemented improvements based on feedback'
       ]);
       break;
       
     case 'project3':
-      content = getProjectContent('Mobile App Development', 'Built cross-platform mobile applications using React Native', [
-        'Developed a fitness tracking app for iOS and Android',
-        'Created a recipe management app with offline functionality',
-        'Built a mobile game with over 10,000 downloads'
+      content = getProjectContent('In Progress', '#', [
+        '#',
+        '#',
+
       ]);
       break;
       
     case 'project4':
-      content = getProjectContent('Game Design', 'Developed interactive games with engaging mechanics', [
-        'Created a platformer game with character customization',
-        'Designed puzzle games with increasing difficulty levels',
-        'Built an educational game for children to learn programming concepts'
+      content = getProjectContent('In Progress', '#', [
+        '#',
+        '#',
+        '#'
       ]);
       break;
       
