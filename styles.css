@@ -268,6 +268,10 @@ canvas {
   transition: background-color 0.3s, transform 0.2s;
   position: relative;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .nav-item:hover {
@@ -278,6 +282,14 @@ canvas {
 .nav-item.active {
   background-color: rgba(0, 0, 0, 0.15);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Icon and text styling */
+.nav-icon {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 5px;
+  display: none; /* Hidden by default */
 }
 
 /* Dropdown Menu */
@@ -311,6 +323,15 @@ canvas {
   margin-bottom: 0;
   padding: 12px;
   border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Project number styling */
+.project-number {
+  display: none;
+  font-weight: bold;
 }
 
 .dropdown-content .nav-item:hover {
@@ -407,6 +428,30 @@ canvas {
   border-radius: 8px;
 }
 
+/* Project dropdown colors */
+.dropdown-content .nav-item[data-project="project1"] {
+  background-color: #FFFFD1; /* Pastel yellow */
+}
+
+.dropdown-content .nav-item[data-project="project2"] {
+  background-color: #FFDAC1; /* Peach color */
+}
+
+.dropdown-content .nav-item[data-project="project3"] {
+  background-color: #FFD1DC; /* Pastel pink */
+}
+
+.dropdown-content .nav-item[data-project="project4"] {
+  background-color: #E0BBE4; /* Pastel purple */
+}
+
+/* Optional: Add a slight hover effect to darken the color slightly */
+.dropdown-content .nav-item:hover {
+  filter: brightness(0.95);
+}
+
+
+
 /* Responsive adjustments */
 @media (max-width: 1200px) {
   .title {
@@ -422,57 +467,133 @@ canvas {
 
 @media (max-width: 800px) {
   .title {
-    font-size: 6vw;
+    font-size: 30px;
     right: 50%;
     transform: translateX(50%);
     text-align: center;
   }
   
   #gameObjective h1 {
-    font-size: 2rem;
+    font-size: 20px;
   }
   
   #gameObjective p, #gameObjective .objective {
-    font-size: 1rem;
+    font-size: 15px;
   }
   
   #gameObjective li {
-    font-size: 0.9rem;
+    font-size: 9px;
   }
   
   .character-option img {
     width: 50px;
-    height: 50px;
+    height: 30px;
   }
   
   .info-container {
-    width: 90%;
-    padding: 20px;
+    width: 70%;
+    padding: 10px;
   }
   
   .info-content h2 {
-    font-size: 1.5rem;
+    font-size: 16px;
+  }
+
+  #gameOverlay button {
+    font-size: 25px;
+    padding: 5px 15px;
+  }
+
+  .character-selection h2 {
+    font-size: 0;
+  }
+
+  .nav-item {
+    font-size: 10px;
+    padding: 10px;
+  }
+  
+  /* Show icons and hide text in mobile view */
+  .nav-icon {
+    display: block;
+    width: 20px;
+    height: 20px;
+    margin-bottom: 2px;
+  }
+  
+  .nav-text {
+    display: none;
+  }
+  
+  /* Adjust dropdown items in mobile view and show numbers instead of text */
+  .dropdown-content .nav-item {
+    font-size: 20px;
+    padding: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFDAC1;
+  }
+  
+  /* Show numbers instead of project names */
+  .project-full-name {
+    display: none;
+  }
+  
+  .project-number {
+    display: block;
+    font-size: 14px;
+  }
+  
+  /* Make sure dropdown remains visible when hovered in mobile view */
+  .dropdown:hover .dropdown-content {
+    display: block;
+    position: absolute;
+    width: 100%;
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 300px) {
   .title {
-    font-size: 8vw;
+    font-size: 10px;
     right: 50%;
     transform: translateX(50%);
     text-align: center;
   }
   
   .character-option img {
-    width: 40px;
-    height: 40px;
+    width: 20px;
+    height: 20px;
   }
   
   .character-option span {
-    font-size: 16px;
+    font-size: 10px;
+  }
+
+  .character-selection h2 {
+    font-size: 0;
+  }
+  
+  .nav-icon {
+    width: 16px;
+    height: 16px;
+    margin-bottom: 0;
+  }
+  
+  /* Ensure dropdown content is properly positioned and styled for very small screens */
+  .dropdown-content {
+    width: 100%;
+    left: 0;
+  }
+  
+  .dropdown-content .nav-item {
+    padding: 6px;
+  }
+  
+  .project-number {
+    font-size: 12px;
   }
 }
-
 
 
 

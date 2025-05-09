@@ -560,14 +560,21 @@ function setupNavigation() {
     showInfoContent('about', 'About Me');
   });
   
-  // Projects dropdown button
-  const projectsDropdown = document.querySelector('.dropdown');
-  projectsDropdown.addEventListener('click', function(e) {
-    // Toggle active class to keep dropdown open
-    if (e.target === this.querySelector('span') || e.target === this) {
-      this.classList.toggle('active');
-    }
-  });
+  // Projects dropdown button - IMPROVED VERSION FOR MOBILE
+const projectsDropdown = document.querySelector('.dropdown');
+projectsDropdown.addEventListener('click', function(e) {
+  // Handle clicks on the dropdown itself, its icon or text
+  if (e.target === this || 
+      e.target === this.querySelector('.nav-icon') || 
+      e.target === this.querySelector('.nav-text')) {
+    // Toggle active class
+    this.classList.toggle('active');
+    
+    // Prevent default behavior
+    e.preventDefault();
+    e.stopPropagation();
+  }
+});
   
   // Project buttons
   document.querySelectorAll('.project-btn').forEach(button => {
