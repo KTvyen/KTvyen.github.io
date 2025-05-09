@@ -716,3 +716,126 @@ function getProjectContent(title, description, bulletPoints) {
     </div>
   `;
 }
+
+// Add mobile controls to the game container
+function addMobileControls() {
+  const gameContainer = document.querySelector('.game-container');
+  
+  // Create mobile direction controls
+  const mobileControls = document.createElement('div');
+  mobileControls.className = 'mobile-controls';
+  mobileControls.innerHTML = `
+    <div class="direction-buttons">
+      <div class="direction-btn up-btn">⬆️</div>
+      <div class="direction-btn left-btn">⬅️</div>
+      <div class="direction-btn right-btn">➡️</div>
+      <div class="direction-btn down-btn">⬇️</div>
+    </div>
+  `;
+  
+  // Create pause button
+  const pauseBtn = document.createElement('div');
+  pauseBtn.className = 'pause-btn';
+  pauseBtn.innerHTML = `II`;
+  
+  // Add controls to the game container
+  gameContainer.appendChild(mobileControls);
+  gameContainer.appendChild(pauseBtn);
+  
+  // Set up event listeners for the direction buttons
+  
+  // Helper function to handle touch events
+  function addTouchEvents(element, keyAction) {
+    // Handle touch start - set key state to true
+    element.addEventListener('touchstart', (e) => {
+      e.preventDefault(); // Prevent default behavior
+      keyAction(true);
+    });
+    
+    // Handle touch end - set key state to false
+    element.addEventListener('touchend', (e) => {
+      e.preventDefault();
+      keyAction(false);
+    });
+    
+    // Handle touch cancel - set key state to false
+    element.addEventListener('touchcancel', (e) => {
+      e.preventDefault();
+      keyAction(false);
+    });
+    
+    // For mouse events (helpful for testing on desktop)
+    element.addEventListener('mousedown', (e) => {
+      e.preventDefault();
+      keyAction(true);
+    });
+    
+    element.addEventListener('mouseup', (e) => {
+      e.preventDefault();
+      keyAction(false);
+    });
+    
+    element.addEventListener('mouseleave', (e) => {
+      e.preventDefault();
+      keyAction(false);
+    });
+  }
+  
+  // Up button - jump
+  const upBtn = mobileControls.querySelector('.up-btn');
+  addTouchEvents(upBtn, (isPressed) => {
+    if (isPressed && player.dy === 0) {
+      player.dy = player.jumpPower;
+    }
+  });
+  
+  // Left button - move left
+  const leftBtn = mobileControls.querySelector('.left-btn');
+  addTouchEvents(leftBtn, (isPressed) => {
+    keys.left = isPressed;
+  });
+  
+  // Right button - move right
+  const rightBtn = mobileControls.querySelector('.right-btn');
+  addTouchEvents(rightBtn, (isPressed) => {
+    keys.right = isPressed;
+  });
+  
+  // Down button - drop through platforms
+  const downBtn = mobileControls.querySelector('.down-btn');
+  addTouchEvents(downBtn, (isPressed) => {
+    keys.down = isPressed;
+  });
+  
+  // Pause button
+  pauseBtn.addEventListener('click', () => {
+    if (!gameStarted) return;
+    
+    gamePaused = !gamePaused;
+    if (gamePaused) {
+      startBtn.style.display = "none";
+      resumeBtn.style.display = "inline-block";
+      restartBtn.style.display = "inline-block";
+      overlay.style.display = "flex";
+    } else {
+      overlay.style.display = "none";
+    }
+  });
+}
+
+// Call this function after DOM is loaded
+window.addEventListener('DOMContentLoaded', () => {
+  addMobileControls();
+  
+  // Make the controls responsive to orientation changes
+  window.addEventListener('resize', () => {
+    // Force recalculation of control positions if needed
+    const mobileControls = document.querySelector('.mobile-controls');
+    if (mobileControls) {
+      mobileControls.style.display = 'none';
+      setTimeout(() => {
+        mobileControls.style.display = '';
+      }, 10);
+    }
+  });
+});
