@@ -649,6 +649,7 @@ function showInfoContent(contentType, title) {
         <p>Email: <a href="mailto:katenguyen08.az@icloud.com">katenguyen08.az@icloud.com</a></p>
         <p>LinkedIn: <a href="https://www.linkedin.com/in/kate-nguyen-3a937334b/" target="_blank">Kate Nguyen</a></p>
         <p>GitHub: <a href="https://github.com/KTvyen" target="_blank">KTvyen</a></p>
+        <p>Codewars: <a href="https://www.codewars.com/users/KTvyen" target="_blank">KTvyen</a></p>
       `;
       break;
       
