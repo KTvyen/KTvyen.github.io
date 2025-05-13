@@ -655,13 +655,14 @@ function showInfoContent(contentType, title) {
       
     case 'project1':
       content = getProjectContent(
-        'Web Development', 
-        'Created responsive websites using HTML, CSS, and JavaScript', 
+        'Platform Jumping Game',
+        'Created a platform jumping game using HTML, CSS, and JavaScript',
         [
-          'Created a website with content management system',
-          'Built a portfolio website using modern web technologies'
+          'A game for my website using javascript',
+          'With character selection and platform mechanics',
+          'Including check points and also a pause menu that explains the game',
         ],
-        'development_photo.png' // Image is in the same folder
+        'development_photo.png'  // Added the image path here
       );
       break;
       
@@ -697,16 +698,28 @@ function showInfoContent(contentType, title) {
   infoOverlay.style.display = 'flex';
 }
 
-function getProjectContent(title, description, bulletPoints) {
+function getProjectContent(title, description, bulletPoints, imagePath = null) {
   let bulletHTML = '';
   bulletPoints.forEach(point => {
     bulletHTML += `<li>${point}</li>`;
   });
   
+  // Handle the image - use relative path, absolute URL, or placeholder
+  let imageHTML = '';
+  if (imagePath) {
+    // This will work with both relative paths and absolute URLs
+    imageHTML = `<img src="${imagePath}" alt="${title}" class="project-image">`;
+  } else {
+    // Use placeholder API if no image is provided
+    imageHTML = `<img src="/api/placeholder/400/300" alt="Project placeholder" class="project-image">`;
+  }
+  
   return `
     <div class="project-content">
       <h2>${title}</h2>
-      <div class="project-image">Project Image Placeholder</div>
+      <div class="image-container">
+        ${imageHTML}
+      </div>
       <p>${description}</p>
       <h3>Key Features:</h3>
       <ul>${bulletHTML}</ul>
